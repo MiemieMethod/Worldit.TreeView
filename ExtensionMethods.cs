@@ -10,7 +10,7 @@ using System.Windows;
 using System.Collections;
 using System.Windows.Input;
 
-namespace ICSharpCode.TreeView
+namespace Worldit.TreeView
 {
 	static class ExtensionMethods
 	{

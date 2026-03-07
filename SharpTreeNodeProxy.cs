@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace ICSharpCode.TreeView {
+namespace Worldit.TreeView {
 	struct ObjectChangedEventArgs {
 		public SharpTreeNode OldNode { get; }
 		public SharpTreeNode NewNode { get; }

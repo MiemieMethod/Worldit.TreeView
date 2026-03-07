@@ -1,6 +1,6 @@
 ﻿using System.Windows.Automation.Peers;
 
-namespace ICSharpCode.TreeView {
+namespace Worldit.TreeView {
 	class SharpTreeViewAutomationPeer : FrameworkElementAutomationPeer {
 		internal SharpTreeViewAutomationPeer(SharpTreeView owner) : base(owner) { }
 

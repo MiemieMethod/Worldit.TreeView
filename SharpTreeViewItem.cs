@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Input;
 using System.Diagnostics;
 
-namespace ICSharpCode.TreeView
+namespace Worldit.TreeView
 {
 	public class SharpTreeViewItem : ListViewItem
 	{

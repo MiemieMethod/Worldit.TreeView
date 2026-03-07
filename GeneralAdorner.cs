@@ -9,7 +9,7 @@ using System.Windows.Documents;
 using System.Windows;
 using System.Windows.Media;
 
-namespace ICSharpCode.TreeView
+namespace Worldit.TreeView
 {
 	public class GeneralAdorner : Adorner
 	{

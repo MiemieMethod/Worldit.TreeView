@@ -16,7 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace ICSharpCode.TreeView
+namespace Worldit.TreeView
 {
 	public class SharpTreeView : ListView
 	{
@@ -255,8 +255,10 @@ namespace ICSharpCode.TreeView
 					Debug.Assert(nodeIndex >= 0 && lastVisibleChildIndex >= 0);
 					if (itemsPerPage > 0 && nodeIndex >= 0 && lastVisibleChildIndex >= 0) {
 						int lastIndex = Math.Min(lastVisibleChildIndex, nodeIndex + itemsPerPage - 1);
-						ScrollIntoView(Items[lastIndex]);
-						Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() => ScrollIntoView(node)));
+						if (lastIndex >= 0 && lastIndex < Items.Count) {
+							ScrollIntoView(Items[lastIndex]);
+							Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() => ScrollIntoView(node)));
+						}
 					}
 				}));
 			}

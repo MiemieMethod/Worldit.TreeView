@@ -10,7 +10,7 @@ using System.Windows.Input;
 using System.Windows.Data;
 using System.Windows;
 
-namespace ICSharpCode.TreeView
+namespace Worldit.TreeView
 {
 	public class EditTextBox : TextBox
 	{

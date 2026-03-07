@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Timers;
+using Timer = System.Timers.Timer;
 using System.Windows;
 
-namespace ICSharpCode.TreeView {
+namespace Worldit.TreeView {
 	public class ClickHandler<T> {
 		readonly int delay;
 		Timer timer;

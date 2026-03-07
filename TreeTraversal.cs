@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ICSharpCode.TreeView
+namespace Worldit.TreeView
 {
 	/// <summary>
 	/// Static helper methods for traversing trees.

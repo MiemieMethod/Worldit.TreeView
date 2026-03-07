@@ -2,7 +2,7 @@
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 
-namespace ICSharpCode.TreeView {
+namespace Worldit.TreeView {
 	class SharpTreeViewItemAutomationPeer : FrameworkElementAutomationPeer, IExpandCollapseProvider {
 		internal SharpTreeViewItemAutomationPeer(SharpTreeViewItem owner) : base(owner) {
 			SharpTreeViewItem.DataContextChanged += OnDataContextChanged;

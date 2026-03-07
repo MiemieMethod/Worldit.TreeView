@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 
-namespace ICSharpCode.TreeView
+namespace Worldit.TreeView
 {
 	sealed class TreeFlattener : IList<SharpTreeNode>, INotifyCollectionChanged
 	{

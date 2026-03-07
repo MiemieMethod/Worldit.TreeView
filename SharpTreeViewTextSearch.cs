@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace ICSharpCode.TreeView {
+namespace Worldit.TreeView {
 	/// <summary>
 	/// Custom TextSearch-implementation.
 	/// Fixes #67 - Moving to class member in tree view by typing in first character of member name selects parent assembly

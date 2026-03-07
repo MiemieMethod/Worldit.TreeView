@@ -9,7 +9,7 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
-namespace ICSharpCode.TreeView
+namespace Worldit.TreeView
 {
 	/// <summary>
 	/// Collection that validates that inserted nodes do not have another parent.

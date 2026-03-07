@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows;
 
-namespace ICSharpCode.TreeView
+namespace Worldit.TreeView
 {
 	public class SharpGridView : GridView
 	{

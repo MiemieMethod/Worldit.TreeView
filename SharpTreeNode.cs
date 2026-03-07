@@ -14,7 +14,7 @@ using System.Collections.Specialized;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace ICSharpCode.TreeView
+namespace Worldit.TreeView
 {
 	public partial class SharpTreeNode : INotifyPropertyChanged
 	{
@@ -102,8 +102,10 @@ namespace ICSharpCode.TreeView
 			get { return null; }
 		}
 
+		private static readonly Brush DefaultForeground = new SolidColorBrush(Color.FromRgb(0xF1, 0xF1, 0xF1));
+
 		public virtual Brush Foreground {
-			get { return SystemColors.WindowTextBrush; }
+			get { return DefaultForeground; }
 		}
 
 		public virtual object Icon

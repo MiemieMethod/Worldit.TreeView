@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.ComponentModel;
 using System.Collections.Specialized;
 
-namespace ICSharpCode.TreeView
+namespace Worldit.TreeView
 {
 	public class SharpTreeNodeView : Control
 	{

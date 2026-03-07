@@ -10,7 +10,7 @@ using System.Windows.Markup;
 using System.Windows.Data;
 using System.Globalization;
 
-namespace ICSharpCode.TreeView
+namespace Worldit.TreeView
 {
 	public class CollapsedWhenFalse : MarkupExtension, IValueConverter
 	{
@@ -24,6 +24,30 @@ namespace ICSharpCode.TreeView
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			return (bool)value ? Visibility.Visible : Visibility.Collapsed;
+		}
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+	/// <summary>
+	/// Returns DependencyProperty.UnsetValue when the bound value is null,
+	/// allowing the property to fall back to its inherited/default value.
+	/// </summary>
+	public class NullToUnsetConverter : MarkupExtension, IValueConverter
+	{
+		public static NullToUnsetConverter Instance = new NullToUnsetConverter();
+
+		public override object ProvideValue(IServiceProvider serviceProvider)
+		{
+			return Instance;
+		}
+
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			return value ?? DependencyProperty.UnsetValue;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

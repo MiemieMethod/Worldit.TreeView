@@ -9,7 +9,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media;
 
-namespace ICSharpCode.TreeView
+namespace Worldit.TreeView
 {
 	class LinesRenderer : FrameworkElement
 	{
