@@ -2,9 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:Default="clr-namespace:Worldit.TreeView">
 
-    <SolidColorBrush x:Key="ListBorder"
-                     Color="#FF3F3F46" />
-
     <Style x:Key="ExpandCollapseToggleStyle"
            TargetType="{x:Type ToggleButton}">
         <Setter Property="Focusable"
@@ -15,13 +12,13 @@
                     <Border Width="9"
                             Height="9"
                             BorderThickness="1"
-                            BorderBrush="#FF555555"
+                            BorderBrush="{Binding ExpanderBorderBrush, RelativeSource={RelativeSource AncestorType={x:Type Default:SharpTreeView}}}"
                             CornerRadius="1"
                             SnapsToDevicePixels="True"
-                            Background="#FF3F3F46">
+                            Background="{Binding ExpanderBackground, RelativeSource={RelativeSource AncestorType={x:Type Default:SharpTreeView}}}">
                         <Path Name="ExpandPath"
                               Margin="1,1,1,1"
-                              Fill="#FFD4D4D4"
+                              Fill="{Binding ExpanderGlyphBrush, RelativeSource={RelativeSource AncestorType={x:Type Default:SharpTreeView}}}"
                               Data="M 0 2 L 0 3 L 2 3 L 2 5 L 3 5 L 3 3 L 5 3 L 5 2 L 3 2 L 3 0 L 2 0 L 2 2 Z" />
                     </Border>
                     <ControlTemplate.Triggers>
@@ -46,12 +43,12 @@
                     <Grid>
                         <Border VerticalAlignment="Center"
                                 Height="2"
-                                Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                                Background="{TemplateBinding MarkerBrush}" />
                         <Path Data="m 0 0 l 3 3 l -3 3"
-                              Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"
+                              Fill="{TemplateBinding MarkerBrush}"
                               HorizontalAlignment="Left" />
                         <Path Data="m 0 0 l -3 3 l 3 3"
-                              Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"
+                              Fill="{TemplateBinding MarkerBrush}"
                               HorizontalAlignment="Right" />
                     </Grid>
                 </ControlTemplate>
@@ -73,12 +70,62 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Default:EditTextBox}">
-                    <Border Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                    <Border Background="{Binding EditBackground, RelativeSource={RelativeSource AncestorType={x:Type Default:SharpTreeView}}}"
                             BorderThickness="1"
-                            BorderBrush="{StaticResource ListBorder}"
+                            BorderBrush="{Binding EditBorderBrush, RelativeSource={RelativeSource AncestorType={x:Type Default:SharpTreeView}}}"
                             Padding="0 1 2 0">
-                        <ScrollViewer Name="PART_ContentHost" />
+                        <ScrollViewer Name="PART_ContentHost"
+                                      TextElement.Foreground="{Binding EditForeground, RelativeSource={RelativeSource AncestorType={x:Type Default:SharpTreeView}}}" />
                     </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SharpTreeViewScrollViewerStyle"
+           TargetType="{x:Type ScrollViewer}">
+        <Setter Property="Background"
+                Value="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type Default:SharpTreeView}}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                CanContentScroll="{TemplateBinding CanContentScroll}"
+                                                Content="{TemplateBinding Content}"
+                                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                Margin="{TemplateBinding Padding}" />
+                        <ScrollBar x:Name="PART_VerticalScrollBar"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                   Orientation="Vertical"
+                                   Value="{TemplateBinding VerticalOffset}"
+                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" />
+                        <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                   Grid.Row="1"
+                                   Grid.Column="0"
+                                   Maximum="{TemplateBinding ScrollableWidth}"
+                                   Orientation="Horizontal"
+                                   Value="{TemplateBinding HorizontalOffset}"
+                                   ViewportSize="{TemplateBinding ViewportWidth}"
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
+                        <Rectangle Grid.Row="1"
+                                   Grid.Column="1"
+                                   Fill="{TemplateBinding Background}" />
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -86,6 +133,25 @@
 
     <Style TargetType="{x:Type Default:SharpTreeView}"
            BasedOn="{StaticResource {x:Type ListBox}}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Default:SharpTreeView}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                        <ScrollViewer Style="{StaticResource SharpTreeViewScrollViewerStyle}"
+                                      CanContentScroll="{Binding Path=(ScrollViewer.CanContentScroll), RelativeSource={RelativeSource TemplatedParent}}"
+                                      HorizontalScrollBarVisibility="{Binding Path=(ScrollViewer.HorizontalScrollBarVisibility), RelativeSource={RelativeSource TemplatedParent}}"
+                                      Padding="{TemplateBinding Padding}"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                      VerticalScrollBarVisibility="{Binding Path=(ScrollViewer.VerticalScrollBarVisibility), RelativeSource={RelativeSource TemplatedParent}}">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
             <Trigger Property="ShowRoot"
                      Value="False">
@@ -97,18 +163,6 @@
 
     <Style x:Key="{x:Static Default:SharpTreeView.DefaultItemContainerStyleKey}"
            TargetType="{x:Type Default:SharpTreeViewItem}">
-        <Style.Triggers>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="ItemsControl.AlternationIndex"
-                               Value="1" />
-                    <Condition Property="Default:SharpTreeView.ShowAlternation"
-                               Value="True" />
-                </MultiTrigger.Conditions>
-                <Setter Property="Background"
-                        Value="#FF2A2A2E" />
-            </MultiTrigger>
-        </Style.Triggers>
     </Style>
 
     <Style x:Key="{x:Static Default:SharpGridView.ItemContainerStyleKey}"
@@ -121,42 +175,34 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListViewItem}">
                     <Border Name="Bd"
-                            Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Padding="{TemplateBinding Padding}"
                             SnapsToDevicePixels="true">
+                        <Border.Background>
+                            <MultiBinding Converter="{Default:GridItemBackgroundConverter}">
+                                <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}" />
+                                <Binding Path="GridSelectedItemBackground" RelativeSource="{RelativeSource AncestorType={x:Type Default:SharpTreeView}}" />
+                                <Binding Path="GridInactiveSelectedItemBackground" RelativeSource="{RelativeSource AncestorType={x:Type Default:SharpTreeView}}" />
+                                <Binding Path="IsSelected" RelativeSource="{RelativeSource TemplatedParent}" />
+                                <Binding Path="(Selector.IsSelectionActive)" RelativeSource="{RelativeSource TemplatedParent}" />
+                            </MultiBinding>
+                        </Border.Background>
                         <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <TextElement.Foreground>
+                                <MultiBinding Converter="{Default:GridItemForegroundConverter}">
+                                    <Binding Path="Foreground" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="GridSelectedItemForeground" RelativeSource="{RelativeSource AncestorType={x:Type Default:SharpTreeView}}" />
+                                    <Binding Path="GridInactiveSelectedItemForeground" RelativeSource="{RelativeSource AncestorType={x:Type Default:SharpTreeView}}" />
+                                    <Binding Path="GridDisabledItemForeground" RelativeSource="{RelativeSource AncestorType={x:Type Default:SharpTreeView}}" />
+                                    <Binding Path="IsSelected" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="(Selector.IsSelectionActive)" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="IsEnabled" RelativeSource="{RelativeSource TemplatedParent}" />
+                                </MultiBinding>
+                            </TextElement.Foreground>
+                        </GridViewRowPresenter>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected"
-                                 Value="true">
-                            <Setter TargetName="Bd"
-                                    Property="Background"
-                                    Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
-                            <Setter Property="Foreground"
-                                    Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
-                        </Trigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsSelected"
-                                           Value="true" />
-                                <Condition Property="Selector.IsSelectionActive"
-                                           Value="false" />
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="Bd"
-                                    Property="Background"
-                                    Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
-                            <Setter Property="Foreground"
-                                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-                        </MultiTrigger>
-                        <Trigger Property="IsEnabled"
-                                 Value="false">
-                            <Setter Property="Foreground"
-                                    Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -169,43 +215,38 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Default:SharpTreeViewItem}">
                     <Border Background="Transparent">
-                        <Border Background="{TemplateBinding Background}">
+                        <Border>
+                            <Border.Background>
+                                <MultiBinding Converter="{Default:TreeItemBackgroundConverter}">
+                                    <Binding Path="Background" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="(ItemsControl.AlternationIndex)" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="(Default:SharpTreeView.ShowAlternation)" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="AlternationBackground" RelativeSource="{RelativeSource AncestorType={x:Type Default:SharpTreeView}}" />
+                                    <Binding Path="IsMouseOver" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="HoverNodeBackground" RelativeSource="{RelativeSource AncestorType={x:Type Default:SharpTreeView}}" />
+                                </MultiBinding>
+                            </Border.Background>
                             <Default:SharpTreeNodeView Name="nodeView"
-                                                       Foreground="{Binding Foreground}"
-                                                       HorizontalAlignment="Left" />
+                                                       HorizontalAlignment="Left">
+                                <Default:SharpTreeNodeView.Foreground>
+                                    <MultiBinding Converter="{Default:TreeNodeForegroundConverter}">
+                                        <Binding Path="NodeForeground" RelativeSource="{RelativeSource AncestorType={x:Type Default:SharpTreeView}}" />
+                                        <Binding Path="Foreground" />
+                                        <Binding Path="SelectedNodeForeground" RelativeSource="{RelativeSource AncestorType={x:Type Default:SharpTreeView}}" />
+                                        <Binding Path="DisabledNodeForeground" RelativeSource="{RelativeSource AncestorType={x:Type Default:SharpTreeView}}" />
+                                        <Binding Path="IsSelected" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        <Binding Path="IsEnabled" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    </MultiBinding>
+                                </Default:SharpTreeNodeView.Foreground>
+                                <Default:SharpTreeNodeView.TextBackground>
+                                    <MultiBinding Converter="{Default:TreeNodeTextBackgroundConverter}">
+                                        <Binding Path="SelectedNodeBackground" RelativeSource="{RelativeSource AncestorType={x:Type Default:SharpTreeView}}" />
+                                        <Binding Path="IsSelected" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    </MultiBinding>
+                                </Default:SharpTreeNodeView.TextBackground>
+                            </Default:SharpTreeNodeView>
                         </Border>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected"
-                                 Value="True">
-                            <Setter TargetName="nodeView"
-                                    Property="TextBackground"
-                                    Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
-                            <Setter TargetName="nodeView"
-                                    Property="Foreground"
-                                    Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
-                        </Trigger>
-                        <!--<MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsSelected"
-                                           Value="True" />
-                                <Condition Property="Selector.IsSelectionActive"
-                                           Value="False" />
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="nodeView"
-                                    Property="TextBackground"
-                                    Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
-                            <Setter TargetName="nodeView"
-                                    Property="Foreground"
-                                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-                        </MultiTrigger>-->
-                        <Trigger Property="IsEnabled"
-                                 Value="False">
-                            <Setter TargetName="nodeView"
-                                    Property="Foreground"
-                                    Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -220,6 +261,7 @@
                     <Grid>
                         <Default:LinesRenderer Name="linesRenderer"
                                                ClipToBounds="True"
+                                               LinesBrush="{Binding LinesBrush, RelativeSource={RelativeSource AncestorType={x:Type Default:SharpTreeView}}}"
                                                Visibility="{Binding ShowLines, RelativeSource={RelativeSource AncestorType={x:Type Default:SharpTreeView}}, Converter={Default:CollapsedWhenFalse}}" />
                         <StackPanel Orientation="Horizontal">
                             <FrameworkElement Name="spacer" />

@@ -13,13 +13,14 @@ namespace Worldit.TreeView
 {
 	class LinesRenderer : FrameworkElement
 	{
-		static LinesRenderer()
-		{
-			pen = new Pen(Brushes.LightGray, 1);
-			pen.Freeze();
-		}
+		public static readonly DependencyProperty LinesBrushProperty =
+			DependencyProperty.Register("LinesBrush", typeof(Brush), typeof(LinesRenderer),
+				new FrameworkPropertyMetadata(Brushes.LightGray, FrameworkPropertyMetadataOptions.AffectsRender));
 
-		static Pen pen;
+		public Brush LinesBrush {
+			get { return (Brush)GetValue(LinesBrushProperty); }
+			set { SetValue(LinesBrushProperty, value); }
+		}
 
 		SharpTreeNodeView NodeView
 		{
@@ -37,6 +38,7 @@ namespace Worldit.TreeView
 
 			var indent = NodeView.CalculateIndent(NodeView.Node);
 			var p = new Point(indent + 4.5, 0);
+			var pen = new Pen(LinesBrush ?? Brushes.LightGray, 1);
 
 			if (!NodeView.Node.IsRoot || NodeView.ParentTreeView.ShowRootExpander) {
 				dc.DrawLine(pen, new Point(p.X, ActualHeight / 2), new Point(p.X + 10, ActualHeight / 2));
