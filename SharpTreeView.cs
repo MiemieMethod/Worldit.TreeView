@@ -102,6 +102,211 @@ namespace Worldit.TreeView
 			set { SetValue(ShowLinesProperty, value); }
 		}
 
+		public static readonly DependencyProperty NodeForegroundProperty =
+			RegisterBrushProperty(nameof(NodeForeground), null);
+
+		public Brush NodeForeground
+		{
+			get { return (Brush)GetValue(NodeForegroundProperty); }
+			set { SetValue(NodeForegroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty DisabledNodeForegroundProperty =
+			RegisterBrushProperty(nameof(DisabledNodeForeground), Brushes.Gray);
+
+		public Brush DisabledNodeForeground
+		{
+			get { return (Brush)GetValue(DisabledNodeForegroundProperty); }
+			set { SetValue(DisabledNodeForegroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty SelectedNodeBackgroundProperty =
+			RegisterBrushProperty(nameof(SelectedNodeBackground), SystemColors.HighlightBrush);
+
+		public Brush SelectedNodeBackground
+		{
+			get { return (Brush)GetValue(SelectedNodeBackgroundProperty); }
+			set { SetValue(SelectedNodeBackgroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty SelectedNodeForegroundProperty =
+			RegisterBrushProperty(nameof(SelectedNodeForeground), SystemColors.HighlightTextBrush);
+
+		public Brush SelectedNodeForeground
+		{
+			get { return (Brush)GetValue(SelectedNodeForegroundProperty); }
+			set { SetValue(SelectedNodeForegroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty AlternationBackgroundProperty =
+			RegisterBrushProperty(nameof(AlternationBackground), CreateBrush(0xFF, 0x2A, 0x2A, 0x2E));
+
+		public Brush AlternationBackground
+		{
+			get { return (Brush)GetValue(AlternationBackgroundProperty); }
+			set { SetValue(AlternationBackgroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty HoverNodeBackgroundProperty =
+			RegisterBrushProperty(nameof(HoverNodeBackground), Brushes.Transparent);
+
+		public Brush HoverNodeBackground
+		{
+			get { return (Brush)GetValue(HoverNodeBackgroundProperty); }
+			set { SetValue(HoverNodeBackgroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty ExpanderBorderBrushProperty =
+			RegisterBrushProperty(nameof(ExpanderBorderBrush), CreateBrush(0xFF, 0x55, 0x55, 0x55));
+
+		public Brush ExpanderBorderBrush
+		{
+			get { return (Brush)GetValue(ExpanderBorderBrushProperty); }
+			set { SetValue(ExpanderBorderBrushProperty, value); }
+		}
+
+		public static readonly DependencyProperty ExpanderBackgroundProperty =
+			RegisterBrushProperty(nameof(ExpanderBackground), CreateBrush(0xFF, 0x3F, 0x3F, 0x46));
+
+		public Brush ExpanderBackground
+		{
+			get { return (Brush)GetValue(ExpanderBackgroundProperty); }
+			set { SetValue(ExpanderBackgroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty ExpanderGlyphBrushProperty =
+			RegisterBrushProperty(nameof(ExpanderGlyphBrush), CreateBrush(0xFF, 0xD4, 0xD4, 0xD4));
+
+		public Brush ExpanderGlyphBrush
+		{
+			get { return (Brush)GetValue(ExpanderGlyphBrushProperty); }
+			set { SetValue(ExpanderGlyphBrushProperty, value); }
+		}
+
+		public static readonly DependencyProperty LinesBrushProperty =
+			RegisterBrushProperty(nameof(LinesBrush), Brushes.LightGray);
+
+		public Brush LinesBrush
+		{
+			get { return (Brush)GetValue(LinesBrushProperty); }
+			set { SetValue(LinesBrushProperty, value); }
+		}
+
+		public static readonly DependencyProperty EditBackgroundProperty =
+			RegisterBrushProperty(nameof(EditBackground), SystemColors.WindowBrush);
+
+		public Brush EditBackground
+		{
+			get { return (Brush)GetValue(EditBackgroundProperty); }
+			set { SetValue(EditBackgroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty EditForegroundProperty =
+			RegisterBrushProperty(nameof(EditForeground), SystemColors.ControlTextBrush);
+
+		public Brush EditForeground
+		{
+			get { return (Brush)GetValue(EditForegroundProperty); }
+			set { SetValue(EditForegroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty EditBorderBrushProperty =
+			RegisterBrushProperty(nameof(EditBorderBrush), CreateBrush(0xFF, 0x3F, 0x3F, 0x46));
+
+		public Brush EditBorderBrush
+		{
+			get { return (Brush)GetValue(EditBorderBrushProperty); }
+			set { SetValue(EditBorderBrushProperty, value); }
+		}
+
+		public static readonly DependencyProperty InsertMarkerBrushProperty =
+			RegisterBrushProperty(nameof(InsertMarkerBrush), SystemColors.HighlightBrush);
+
+		public Brush InsertMarkerBrush
+		{
+			get { return (Brush)GetValue(InsertMarkerBrushProperty); }
+			set { SetValue(InsertMarkerBrushProperty, value); }
+		}
+
+		public static readonly DependencyProperty PreviewInsideBackgroundProperty =
+			RegisterBrushProperty(nameof(PreviewInsideBackground), SystemColors.HighlightBrush);
+
+		public Brush PreviewInsideBackground
+		{
+			get { return (Brush)GetValue(PreviewInsideBackgroundProperty); }
+			set { SetValue(PreviewInsideBackgroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty PreviewInsideForegroundProperty =
+			RegisterBrushProperty(nameof(PreviewInsideForeground), SystemColors.HighlightTextBrush);
+
+		public Brush PreviewInsideForeground
+		{
+			get { return (Brush)GetValue(PreviewInsideForegroundProperty); }
+			set { SetValue(PreviewInsideForegroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty GridSelectedItemBackgroundProperty =
+			RegisterBrushProperty(nameof(GridSelectedItemBackground), SystemColors.HighlightBrush);
+
+		public Brush GridSelectedItemBackground
+		{
+			get { return (Brush)GetValue(GridSelectedItemBackgroundProperty); }
+			set { SetValue(GridSelectedItemBackgroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty GridSelectedItemForegroundProperty =
+			RegisterBrushProperty(nameof(GridSelectedItemForeground), SystemColors.HighlightTextBrush);
+
+		public Brush GridSelectedItemForeground
+		{
+			get { return (Brush)GetValue(GridSelectedItemForegroundProperty); }
+			set { SetValue(GridSelectedItemForegroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty GridInactiveSelectedItemBackgroundProperty =
+			RegisterBrushProperty(nameof(GridInactiveSelectedItemBackground), SystemColors.ControlBrush);
+
+		public Brush GridInactiveSelectedItemBackground
+		{
+			get { return (Brush)GetValue(GridInactiveSelectedItemBackgroundProperty); }
+			set { SetValue(GridInactiveSelectedItemBackgroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty GridInactiveSelectedItemForegroundProperty =
+			RegisterBrushProperty(nameof(GridInactiveSelectedItemForeground), SystemColors.ControlTextBrush);
+
+		public Brush GridInactiveSelectedItemForeground
+		{
+			get { return (Brush)GetValue(GridInactiveSelectedItemForegroundProperty); }
+			set { SetValue(GridInactiveSelectedItemForegroundProperty, value); }
+		}
+
+		public static readonly DependencyProperty GridDisabledItemForegroundProperty =
+			RegisterBrushProperty(nameof(GridDisabledItemForeground), SystemColors.GrayTextBrush);
+
+		public Brush GridDisabledItemForeground
+		{
+			get { return (Brush)GetValue(GridDisabledItemForegroundProperty); }
+			set { SetValue(GridDisabledItemForegroundProperty, value); }
+		}
+
+		static DependencyProperty RegisterBrushProperty(string propertyName, Brush defaultBrush)
+		{
+			return DependencyProperty.Register(
+				propertyName,
+				typeof(Brush),
+				typeof(SharpTreeView),
+				new FrameworkPropertyMetadata(defaultBrush, FrameworkPropertyMetadataOptions.Inherits));
+		}
+
+		static Brush CreateBrush(byte a, byte r, byte g, byte b)
+		{
+			var brush = new SolidColorBrush(Color.FromArgb(a, r, g, b));
+			brush.Freeze();
+			return brush;
+		}
+
 		public static bool GetShowAlternation(DependencyObject obj)
 		{
 			return (bool)obj.GetValue(ShowAlternationProperty);
@@ -644,23 +849,21 @@ namespace Worldit.TreeView
 			Before, Inside, After
 		}
 
-		public Func<Brush> GetPreviewInsideTextBackground = () => SystemColors.HighlightBrush;
-		public Func<Brush> GetPreviewInsideForeground = () => SystemColors.HighlightTextBrush;
-
 		void ShowPreview(SharpTreeViewItem item, DropPlace place)
 		{
 			previewNodeView = item.NodeView;
 			previewPlace = place;
 
 			if (place == DropPlace.Inside) {
-				previewNodeView.TextBackground = GetPreviewInsideTextBackground();
-				previewNodeView.Foreground = GetPreviewInsideForeground();
+				previewNodeView.SetCurrentValue(SharpTreeNodeView.TextBackgroundProperty, PreviewInsideBackground);
+				previewNodeView.SetCurrentValue(ForegroundProperty, PreviewInsideForeground);
 			}
 			else {
 				if (insertMarker == null) {
 					var adornerLayer = AdornerLayer.GetAdornerLayer(this);
 					var adorner = new GeneralAdorner(this);
 					insertMarker = new InsertMarker();
+					BindingOperations.SetBinding(insertMarker, InsertMarker.MarkerBrushProperty, new Binding(nameof(InsertMarkerBrush)) { Source = this });
 					adorner.Child = insertMarker;
 					adornerLayer.Add(adorner);
 				}
@@ -702,13 +905,22 @@ namespace Worldit.TreeView
 		void HidePreview()
 		{
 			if (previewNodeView != null) {
-				previewNodeView.ClearValue(SharpTreeNodeView.TextBackgroundProperty);
-				previewNodeView.ClearValue(SharpTreeNodeView.ForegroundProperty);
+				RefreshBinding(previewNodeView, SharpTreeNodeView.TextBackgroundProperty);
+				RefreshBinding(previewNodeView, ForegroundProperty);
 				if (insertMarker != null) {
 					insertMarker.Visibility = Visibility.Collapsed;
 				}
 				previewNodeView = null;
 			}
+		}
+
+		static void RefreshBinding(DependencyObject target, DependencyProperty property)
+		{
+			var binding = BindingOperations.GetBindingExpressionBase(target, property);
+			if (binding != null)
+				binding.UpdateTarget();
+			else
+				target.ClearValue(property);
 		}
 		#endregion
 

@@ -33,6 +33,11 @@ namespace Worldit.TreeView
 
 		void Init()
 		{
+			var treeView = this.FindAncestor<SharpTreeView>();
+			if (treeView != null) {
+				BindingOperations.SetBinding(this, ForegroundProperty, new Binding(nameof(SharpTreeView.EditForeground)) { Source = treeView });
+			}
+
 			if (Node != null)
 				Text = Node.LoadEditText();
 			Focus();

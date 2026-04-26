@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Worldit.TreeView
 {
@@ -16,6 +17,15 @@ namespace Worldit.TreeView
 		{
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(InsertMarker),
 				new FrameworkPropertyMetadata(typeof(InsertMarker)));
+		}
+
+		public static readonly DependencyProperty MarkerBrushProperty =
+			DependencyProperty.Register("MarkerBrush", typeof(Brush), typeof(InsertMarker),
+				new FrameworkPropertyMetadata(SystemColors.HighlightBrush));
+
+		public Brush MarkerBrush {
+			get { return (Brush)GetValue(MarkerBrushProperty); }
+			set { SetValue(MarkerBrushProperty, value); }
 		}
 	}
 }
